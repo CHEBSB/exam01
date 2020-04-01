@@ -1,5 +1,7 @@
 #include "mbed.h"
+#include "uLCD_4DGL.h"
 
+uLCD_4DGL uLCD(D1, D0, D2); // serial tx, serial rx, reset pin;
 PwmOut PWM1(D6);
 Serial pc( USBTX, USBRX );
 DigitalIn Din(D7);
@@ -34,7 +36,13 @@ void sendToPython() {
     }
 }
 int main() {
-
+    // basic printf demo = 16 by 18 characters on screen
+    uLCD.printf("\n107061110\n"); //Default Green on black text
+    
+    uLCD.line(20,20 , 30, 20, BLUE);
+    uLCD.line(20, 30 , 30, 30, BLUE);
+    uLCD.line(20, 20 , 20, 30, BLUE);
+    uLCD.line(30, 20 , 30, 30, BLUE);
    PWM1.period(0.001);
    T2.start(sample);
    T3.start(sendToPython);
